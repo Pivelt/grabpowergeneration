@@ -1,8 +1,8 @@
-name: Scrape Data Daily
+name: Scrape Data Hourly
 
 on:
   schedule:
-    - cron: "0 9 * * *"  # 每天9点触发任务
+    - cron: "0 * * * *"  # 每小时的第0分钟触发任务
 
 jobs:
   scrape:
