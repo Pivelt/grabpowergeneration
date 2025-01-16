@@ -44,8 +44,8 @@ def open_and_scrape():
     finally:
         driver.quit()
 
-# 设置定时任务：每天定时运行
-schedule.every().day.at("09:00").do(open_and_scrape)  # 每天上午9点执行
+# 设置定时任务：每小时执行一次
+schedule.every().hour.do(open_and_scrape)
 
 # 循环运行任务
 while True:
