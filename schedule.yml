@@ -3,6 +3,7 @@ name: Scrape Data Hourly
 on:
   schedule:
     - cron: "0 * * * *"  # 每小时的第0分钟触发任务
+  workflow_dispatch:  # 允许手动触发
 
 jobs:
   scrape:
@@ -20,7 +21,17 @@ jobs:
     - name: Install dependencies
       run: |
         pip install selenium pandas openpyxl schedule
-        
+
     - name: Run the script
       run: |
         python scrape_data.py
+    
+    - name: Commit and push generated Excel file
+      uses: EndBug/add-and-commit@v7
+      with:
+        author_name: "GitHub Actions"
+        author_email: "actions@github.com"
+        message: "Add scraped data"
+        add: "data.xlsx"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
